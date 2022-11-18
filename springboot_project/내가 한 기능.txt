@@ -1,0 +1,36 @@
+10번대 20번대 30번대로 카테고리 나눠서  물품 카테고리 분류기능 완성
+
+폼에서 시간까지 받아오려면 Timestamp 사용해서 포맷해준뒤에 저장해줌
+
+화면에서 남은기한 타이머기능 완성
+
+검색기능 완성
+
+경매 남은기간 리스트에서 보여줌
+for(Auction a:list) {
+			long day = (a.getEnd_date().getTime() - now.getTime()) / (3600000*24); // 일
+			long hour = ((a.getEnd_date().getTime() - now.getTime()) % (3600000*24)) / 3600000; // 시
+			long min = (((a.getEnd_date().getTime() - now.getTime()) % (3600000*24)) % 3600000) / 60000; // 분
+			a.setMin(min);
+			a.setHour(hour);
+			a.setDay(day);
+//			최고입찰가 추가
+			if(bs.selectMax(a.getAuction_no())==0) {
+				a.setBid_price(a.getStart_price());
+			}else {
+				a.setBid_price(bs.selectMax(a.getAuction_no()));
+			}
+//			입찰수 추가
+			a.setBid_cnt(bs.getTotal(a.getAuction_no()));
+		}
+관심물품 등록기능 완성
+
+입찰기능 완성 입찰 단위에 맞지 않으면 경고 해주고 입력 불가 현재가 보다 높게 입찰하지않으면 입찰불가 
+
+조회순 마감기한순 정렬 기능완성
+
+관리자페이지 멤버 삭제및 복구기능 게시글 삭제 복구기능 페이징 리스트완성
+
+세션체크 기능 추가 관리자 세션체크도 추가
+
+관리자 페이지 경매목록 삭제 경매확정 낙찰 확인 이메일 보내기 기능추가
